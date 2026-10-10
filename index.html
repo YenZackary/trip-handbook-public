@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>湖南探親與張家界 6 日隨行手冊</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .photo-card { transition: all 0.2s ease-in-out; }
+    .photo-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    .tl-photo-box img { cursor: zoom-in; }
+    @media print { .no-print { display: none !important; } body { background: #fff; } .photo-card { break-inside: avoid; } }
+  </style>
+</head>
+<body class="text-slate-800 pb-16">
+
+  <!-- Image Zoom Modal -->
+  <div id="image-modal" class="fixed inset-0 bg-black/90 z-[100] hidden flex flex-col items-center justify-center p-4 cursor-zoom-out no-print" onclick="closeImageModal()">
+    <div class="relative max-w-5xl max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+      <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white text-2xl hover:text-amber-400 transition">
+        <i class="fa-solid fa-xmark"></i> 關閉 (Esc)
+      </button>
+      <img id="modal-img" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl object-contain border border-white/20 select-none" src="" alt="放大照片">
+      <p id="modal-caption" class="text-white text-sm mt-3 font-medium bg-black/60 px-4 py-1.5 rounded-full border border-white/10 text-center"></p>
+    </div>
+  </div>
+
+  <!-- Header Banner -->
+  <header class="bg-gradient-to-r from-emerald-800 via-teal-800 to-cyan-900 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-2">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="bg-amber-400 text-slate-900 text-[11px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">隨行手冊</span>
+          <span class="text-xs text-teal-200"><i class="fa-regular fa-calendar-alt mr-1"></i> 10/12 - 10/17</span>
+          <span class="text-[11px] bg-white/20 text-teal-100 px-2 py-0.5 rounded-full"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i>雙擊照片可放大</span>
+        </div>
+        <h1 class="text-lg md:text-2xl font-bold mt-1">湖南長沙・邵陽探親・張家界 6 日行程手冊</h1>
+      </div>
+      <div class="flex items-center gap-2 no-print">
+        <button onclick="clearAllData()" class="bg-rose-600/80 hover:bg-rose-700 text-white text-xs px-3 py-2 rounded-lg transition backdrop-blur flex items-center gap-1.5 border border-rose-400/30" title="清除所有上傳照片與儲存設定">
+          <i class="fa-solid fa-rotate-right"></i> 重置設定
+        </button>
+        <button onclick="window.print()" class="bg-white/15 hover:bg-white/25 text-white text-xs px-3.5 py-2 rounded-lg transition backdrop-blur flex items-center gap-1.5 border border-white/20">
+          <i class="fa-solid fa-print"></i> 列印 / 儲存 PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick Info Bar -->
+  <section class="max-w-5xl mx-auto px-4 mt-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-hotel text-lg"></i>
+        </div>
+        <div class="text-xs">
+          <div class="text-slate-400 font-medium">長沙住宿 (D1-D2, D5)</div>
+          <div class="font-bold text-slate-800 text-sm mt-0.5">西蘭蒂亞公寓酒店</div>
+          <div class="text-slate-500 mt-1"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i>地鐵6號線湘雅醫院站 2號出口 步行約 13 分鐘</div>
+        </div>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-mountain-city text-lg"></i>
+        </div>
+        <div class="text-xs">
+          <div class="text-slate-400 font-medium">張家界住宿 (D3-D4)</div>
+          <div class="font-bold text-slate-800 text-sm mt-0.5">界止 湘西之戀酒店</div>
+          <div class="text-slate-500 mt-1"><i class="fa-solid fa-location-dot text-cyan-600 mr-1"></i>天門山養雲店 (D4、D5導覽專車飯店接送)</div>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-amber-200 text-amber-800 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+        </div>
+        <div class="text-xs">
+          <div class="text-amber-800 font-bold uppercase">D4 & D5 景區專車接送隨身必備</div>
+          <p class="text-amber-900 mt-1 leading-relaxed">
+            <span class="inline-block bg-amber-100 px-1.5 py-0.5 rounded mr-1 font-semibold">🎫 護照 & 台胞證</span>
+            <span class="inline-block bg-amber-100 px-1.5 py-0.5 rounded mr-1 font-semibold">💧 保溫水壺</span>
+            <span class="inline-block bg-amber-100 px-1.5 py-0.5 rounded font-semibold">🍫 高熱量糧食</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <main class="max-w-5xl mx-auto px-4 mt-5">
+    <div class="flex overflow-x-auto space-x-2 border-b border-slate-200 pb-2 custom-scrollbar no-print">
+      <button onclick="switchTab('day1')" id="tab-day1" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-emerald-700 text-white shadow">Day 1 (10/12) 桃園-長沙</button>
+      <button onclick="switchTab('day2')" id="tab-day2" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-white text-slate-600 hover:bg-slate-100 border">Day 2 (10/13) 長沙巡禮-邵陽</button>
+      <button onclick="switchTab('day3')" id="tab-day3" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-white text-slate-600 hover:bg-slate-100 border">Day 3 (10/14) 探親-張家界</button>
+      <button onclick="switchTab('day4')" id="tab-day4" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-white text-slate-600 hover:bg-slate-100 border">Day 4 (10/15) 國家森林公園</button>
+      <button onclick="switchTab('day5')" id="tab-day5" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-white text-slate-600 hover:bg-slate-100 border">Day 5 (10/16) 天門山-長沙</button>
+      <button onclick="switchTab('day6')" id="tab-day6" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-white text-slate-600 hover:bg-slate-100 border">Day 6 (10/17) 長沙-返家</button>
+      <button onclick="switchTab('food')" id="tab-food" class="day-tab px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition bg-amber-500 text-white hover:bg-amber-600"><i class="fa-solid fa-utensils mr-1"></i> 美食圖鑑</button>
+    </div>
+
+    <div class="mt-5 space-y-6">
+
+      <!-- ==================== DAY 1 ==================== -->
+      <div id="content-day1" class="tab-content block">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/12 (週六)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-plane-arrival text-emerald-600 mr-2"></i>Day 1：啟程抵達長沙與親戚迎賓晚宴</h2>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border space-y-2 text-xs md:text-sm">
+            <div class="font-bold text-slate-800">✈️ 去程航班資訊</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-600">
+              <div class="bg-white p-3 rounded-lg border">11:10 - 12:50 | 桃園 T2 ➔ 廈門高崎 T3[cite: 7, 8, 9]</div>
+              <div class="bg-white p-3 rounded-lg border">16:25 - 18:15 | 廈門高崎 T3 ➔ 長沙黃花 T2[cite: 7, 8, 9]</div>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs md:text-sm">
+            <div class="font-bold text-slate-800"><i class="fa-solid fa-clock text-emerald-600"></i> 行程時間軸：</div>
+            <div class="relative border-l-2 border-emerald-400 pl-4 space-y-5 ml-2">
+              <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border">
+                <span class="absolute -left-[23px] top-4 w-3.5 h-3.5 bg-emerald-600 rounded-full ring-4 ring-white"></span>
+                <div>
+                  <div class="font-bold text-slate-800 text-sm">18:15 後 | 機場專車接送 & 飯店入住</div>
+                  <p class="text-slate-600 mt-1">抵達長沙黃花機場，專車接送至【西蘭蒂亞公寓酒店】。</p>
+                </div>
+              </div>
+
+              <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border">
+                <span class="absolute -left-[23px] top-4 w-3.5 h-3.5 bg-indigo-600 rounded-full ring-4 ring-white"></span>
+                <div>
+                  <div class="font-bold text-slate-800 text-sm">夜間 | 長沙地標夜景巡禮</div>
+                  <p class="text-slate-600 mt-1">遊覽【杜甫江閣】欣賞古風夜景燈光，漫步【湘江江灘公園】[cite: 2, 10]。</p>
+                </div>
+                <div class="flex gap-2 shrink-0">
+                  <div class="tl-photo-box w-24 h-24 rounded-lg overflow-hidden border bg-slate-900 shadow-sm">
+                    <img src="images/Day1-杜甫江閣.jpg" class="w-full h-full object-contain select-none hover:scale-105 transition" ondblclick="openImageModal('images/Day1-杜甫江閣.jpg', '杜甫江閣夜景')" alt="杜甫江閣">
+                  </div>
+                  <div class="tl-photo-box w-24 h-24 rounded-lg overflow-hidden border bg-slate-900 shadow-sm">
+                    <img src="images/Day1-湘江江灘公園.jpg" class="w-full h-full object-contain select-none hover:scale-105 transition" ondblclick="openImageModal('images/Day1-湘江江灘公園.jpg', '湘江江灘公園夜景')" alt="湘江江灘公園[cite: 10]">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+
+      <!-- ==================== DAY 2 ==================== -->
+      <div id="content-day2" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/13 (週日)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-landmark text-emerald-600 mr-2"></i>Day 2：長沙文化與老街漫遊 ➔ 出發邵陽</h2>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-xs md:text-sm">
+            <div class="space-y-3">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+                <div class="space-y-1 flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="bg-emerald-800 text-white px-2 py-0.5 rounded font-bold text-xs">09:00–10:30</span>
+                    <span class="font-bold text-emerald-900 text-sm">湖南省博物館[cite: 6]</span>
+                  </div>
+                  <p class="text-emerald-800 text-xs">欣賞馬王堆漢墓文物與辛追夫人展區[cite: 6]。</p>
+                </div>
+                <div class="tl-photo-box shrink-0 w-full sm:w-36 h-24 rounded-lg overflow-hidden border bg-slate-900 group shadow-sm">
+                  <img src="images/Day2-湖南省博物館.jpg" class="w-full h-full object-contain group-hover:scale-105 transition select-none" ondblclick="openImageModal('images/Day2-湖南省博物館.jpg', '湖南省博物館文物')" alt="博物館">
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border">
+                <div class="space-y-1 flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="bg-slate-700 text-white px-2 py-0.5 rounded font-bold text-xs">11:00–11:40</span>
+                    <span class="font-bold text-slate-800">長沙 IFS 7F 雕塑花園</span>
+                  </div>
+                  <p class="text-slate-600 text-xs">打卡巨型 KAWS 雕塑與打卡牆[cite: 16]。</p>
+                </div>
+                <div class="tl-photo-box shrink-0 w-full sm:w-36 h-24 rounded-lg overflow-hidden border bg-slate-900 group shadow-sm">
+                  <img src="images/Day2-長沙 IFS 7F 雕塑花園.jpg" class="w-full h-full object-contain group-hover:scale-105 transition select-none" ondblclick="openImageModal('images/Day2-長沙 IFS 7F 雕塑花園.jpg', '長沙 IFS')" alt="IFS">
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border">
+                <div class="space-y-1 flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="bg-slate-700 text-white px-2 py-0.5 rounded font-bold text-xs">11:40–12:20</span>
+                    <span class="font-bold text-slate-800">東茅街茶館[cite: 3]</span>
+                  </div>
+                  <p class="text-slate-600 text-xs">體驗老長沙道地的茶館氛圍[cite: 3]。</p>
+                </div>
+                <div class="tl-photo-box shrink-0 w-full sm:w-36 h-24 rounded-lg overflow-hidden border bg-slate-900 group shadow-sm">
+                  <img src="images/Day2-東茅街茶館.jpg" class="w-full h-full object-contain group-hover:scale-105 transition select-none" ondblclick="openImageModal('images/Day2-東茅街茶館.jpg', '東茅街茶館內部')" alt="東茅街茶館">
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border">
+                <div class="space-y-1 flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="bg-slate-700 text-white px-2 py-0.5 rounded font-bold text-xs">13:50–15:00</span>
+                    <span class="font-bold text-slate-800">五一商圈 & 黃興路步行街 & 茶顏悅色[cite: 4, 5, 15]</span>
+                  </div>
+                  <p class="text-slate-600 text-xs">漫步五一商圈、黃興路步行街，並順道品嚐必喝的茶顏悅色[cite: 4, 5, 15]。</p>
+                </div>
+                <div class="flex gap-2 shrink-0">
+                  <div class="tl-photo-box w-20 h-20 rounded-lg overflow-hidden border bg-slate-900">
+                    <img src="images/Day2-五一商圈.jpg" class="w-full h-full object-contain select-none" ondblclick="openImageModal('images/Day2-五一商圈.jpg', '五一商圈')" alt="五一商圈[cite: 4]">
+                  </div>
+                  <div class="tl-photo-box w-20 h-20 rounded-lg overflow-hidden border bg-slate-900">
+                    <img src="images/Day2-黃興路步行街.jpg" class="w-full h-full object-contain select-none" ondblclick="openImageModal('images/Day2-黃興路步行街.jpg', '黃興路步行街')" alt="黃興路步行街[cite: 5]">
+                  </div>
+                  <div class="tl-photo-box w-20 h-20 rounded-lg overflow-hidden border bg-slate-900">
+                    <img src="images/Day2-茶顏悅色.jpg" class="w-full h-full object-contain select-none" ondblclick="openImageModal('images/Day2-茶顏悅色.jpg', '茶顏悅色')" alt="茶顏悅色[cite: 15]">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-amber-100 text-amber-900 p-3 rounded-lg font-bold text-center mt-3">
+              🚗 15:00 後：長沙行程結束，啟程前往邵陽。
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+
+      <!-- ==================== DAY 3 ==================== -->
+      <div id="content-day3" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/14 (週一)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-users text-emerald-600 mr-2"></i>Day 3：邵陽鐵爐頭探親 ➔ 移動至張家界</h2>
+            </div>
+          </div>
+          <div class="bg-red-50 p-4 rounded-xl border border-red-200">
+            <div class="font-bold text-red-900 text-base"><i class="fa-solid fa-heart text-red-600"></i> 08:00 – 14:00 邵陽鐵爐頭探親</div>
+            <p class="text-red-800 text-xs md:text-sm mt-1">溫馨家族聚會、敘舊與午餐探親時光。</p>
+          </div>
+          <div class="space-y-3 pt-2">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-train text-cyan-600"></i> 14:00 以後前往張家界高鐵方案</h3>
+            
+            <div class="border rounded-xl p-3.5 bg-slate-50 space-y-2 text-xs">
+              <div class="font-bold text-cyan-800">選項一：經隆回車站 (票價約 ￥161-181)</div>
+              <div>• G6168：15:20 隆回 ➔ 17:26 張家界西</div>
+              <div>• G6122：16:35 隆回 ➔ 18:48 張家界西</div>
+              <div>• D3968：19:23 隆回 ➔ 22:07 張家界西</div>
+            </div>
+
+            <div class="border rounded-xl p-3.5 bg-slate-50 space-y-2 text-xs">
+              <div class="font-bold text-teal-800">選項二：經洞口車站 (票價約 ￥168)</div>
+              <div>• G6168：15:40 洞口 ➔ 17:26 張家界西</div>
+              <div>• G6122：16:55 洞口 ➔ 18:48 張家界西</div>
+              <div>• D3968：19:43 洞口 ➔ 22:07 張家界西</div>
+            </div>
+          </div>
+
+          <div class="border-t pt-4 space-y-3 text-xs md:text-sm">
+            <div class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-hotel text-cyan-600 mr-1.5"></i> 19:00 - 19:30 抵達【界止 湘西之戀酒店】</div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 space-y-2">
+                <div class="font-bold text-amber-900">🍽️ 晚餐選擇：</div>
+                <ul class="list-disc list-inside text-amber-800 space-y-1 text-xs">
+                  <li>老媽下飯菜 (湘菜) 🚶🏻 步行 1 min</li>
+                  <li>寨嫂當家-天門山索道店 🚌 公車 20 min</li>
+                  <li>索西三寨 (湘西土菜) 🚌 公車 28 min</li>
+                  <li>趕年三下鍋-天門山索道店 🚌 公車 20 min</li>
+                  <li>喜堂家飯 (張家界土菜) 🚌 公車 30 min</li>
+                </ul>
+              </div>
+
+              <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+                <div class="font-bold text-slate-800">🛒 超市採買與夜景行程：</div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1 text-xs">
+                  <li>梅尼超市-金豐花園店 🚶🏻 步行 6 min</li>
+                  <li>大庸古城 🚌 公車 30 min</li>
+                  <li>72奇樓 🚌 公車 38 min</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t pt-4 space-y-3">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-city text-cyan-600"></i> 張家界夜景巡禮寫真</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day3-72奇樓.jpg', '72奇樓夜景')">
+                  <img src="images/Day3-72奇樓.jpg" class="w-full h-full object-contain select-none" alt="72奇樓">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-medium text-slate-700">72奇樓夜景[cite: 17]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day3-大庸古城.jpg', '大庸古城夜景')">
+                  <img src="images/Day3-大庸古城.jpg" class="w-full h-full object-contain select-none" alt="大庸古城">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-medium text-slate-700">大庸古城夜景[cite: 18]</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== DAY 4 ==================== -->
+      <div id="content-day4" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/15 (週二)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-tree text-emerald-600 mr-2"></i>Day 4：張家界國家森林公園一日深度遊</h2>
+            </div>
+            <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">飯店專車往返接送</span>
+          </div>
+
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-3.5 text-xs text-amber-900">
+            <strong>⚠️ 貼心提醒：</strong> 專車至飯店接送。請備妥保溫瓶、證件與高熱量乾糧。
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-mountain text-emerald-600"></i> 景區重點站點寫真</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-武陵源景區.jpg', '武陵源景區')">
+                  <img src="images/Day4-武陵源景區.jpg" class="w-full h-full object-contain select-none" alt="武陵源">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">1. 武陵源景區[cite: 19]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-金鞭溪.jpg', '金鞭溪')">
+                  <img src="images/Day4-金鞭溪.jpg" class="w-full h-full object-contain select-none" alt="金鞭溪">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">2. 金鞭溪[cite: 20]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-百龍天梯.jpg', '百龍天梯')">
+                  <img src="images/Day4-百龍天梯.jpg" class="w-full h-full object-contain select-none" alt="百龍天梯">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">3. 百龍天梯[cite: 21]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-袁家界 (乾坤柱）.jpg', '袁家界 乾坤柱')">
+                  <img src="images/Day4-袁家界 (乾坤柱）.jpg" class="w-full h-full object-contain select-none" alt="袁家界">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">4. 袁家界 (乾坤柱)[cite: 22]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-天子山.jpg', '天子山')">
+                  <img src="images/Day4-天子山.jpg" class="w-full h-full object-contain select-none" alt="天子山">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">5. 天子山[cite: 23]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-天子山索道.jpg', '天子山索道')">
+                  <img src="images/Day4-天子山索道.jpg" class="w-full h-full object-contain select-none" alt="天子山索道">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">6. 天子山索道[cite: 24]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-十里畫廊.jpg', '十里畫廊')">
+                  <img src="images/Day4-十里畫廊.jpg" class="w-full h-full object-contain select-none" alt="十里畫廊">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">7. 十里畫廊[cite: 25]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t pt-4 space-y-3">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-qrcode text-emerald-600"></i> Klook 森林公園導覽憑證與方案</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              
+              
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day4-國家森林公園景區導覽票券憑證3.jpg', 'Klook憑證3')">
+                  <img src="images/Day4-國家森林公園景區導覽票券憑證3.jpg" class="w-full h-full object-contain select-none" alt="憑證3">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-medium text-slate-700">費用包含與不包含說明[cite: 28]</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== DAY 5 ==================== -->
+      <div id="content-day5" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/16 (週三)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-cloud-sun text-emerald-600 mr-2"></i>Day 5：天門山國家森林公園 ➔ 返回長沙</h2>
+            </div>
+            <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full font-bold">飯店專車去程接送</span>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs md:text-sm">
+            <div class="font-bold text-slate-800">⛰️ 08:00 – 14:30 | 天門山國家森林公園導覽</div>
+            <div class="text-emerald-700 font-semibold">飯店專車接送</div>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>導覽路線：</strong> 天門山 ➔ 天門山索道 ➔ 天門洞 ➔ 天門山穿山扶梯 ➔ 珙桐園商亭 ➔ 天門山玻璃棧道 ➔ 鬼谷天塹 ➔ 天門山寺 ➔ 裡那別墅 ➔ 天門山索道 ➔ 回程專車送回飯店。
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-mountain-sun text-cyan-600"></i> 天門山景點寫真集</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山.jpg', '天門山')">
+                  <img src="images/Day5-天門山.jpg" class="w-full h-full object-contain select-none" alt="天門山">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門山風景[cite: 30]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山索道（上山）.jpg', '天門山索道上山')">
+                  <img src="images/Day5-天門山索道（上山）.jpg" class="w-full h-full object-contain select-none" alt="索道上山">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門山索道 (上山)[cite: 29]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山索道(下山).jpg', '天門山索道下山')">
+                  <img src="images/Day5-天門山索道(下山).jpg" class="w-full h-full object-contain select-none" alt="索道下山">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門山索道 (下山)[cite: 32]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門洞 .jpg', '天門洞')">
+                  <img src="images/Day5-天門洞 .jpg" class="w-full h-full object-contain select-none" alt="天門洞">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門洞奇觀[cite: 38]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山穿山扶梯.jpg', '穿山扶梯')">
+                  <img src="images/Day5-天門山穿山扶梯.jpg" class="w-full h-full object-contain select-none" alt="穿山扶梯">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門山穿山扶梯[cite: 37]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山玻璃棧道.jpg', '玻璃棧道')">
+                  <img src="images/Day5-天門山玻璃棧道.jpg" class="w-full h-full object-contain select-none" alt="玻璃棧道">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">玻璃棧道[cite: 35]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-鬼谷天塹 .jpg', '鬼谷天塹')">
+                  <img src="images/Day5-鬼谷天塹 .jpg" class="w-full h-full object-contain select-none" alt="鬼谷天塹">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">鬼谷天塹[cite: 34]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山寺.jpg', '天門山寺')">
+                  <img src="images/Day5-天門山寺.jpg" class="w-full h-full object-contain select-none" alt="天門山寺">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">天門山寺[cite: 33]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-李娜別墅.jpg', '李娜別墅')">
+                  <img src="images/Day5-李娜別墅.jpg" class="w-full h-full object-contain select-none" alt="李娜別墅">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">李娜別墅[cite: 31]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-28 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-珙桐園商亭 .jpg', '珙桐園商亭')">
+                  <img src="images/Day5-珙桐園商亭 .jpg" class="w-full h-full object-contain select-none" alt="珙桐園">
+                </div>
+                <div class="p-2 bg-white border-t text-[11px] font-medium text-center text-slate-700">珙桐園商亭[cite: 36]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs md:text-sm border-t pt-4">
+            <div class="font-bold text-slate-800">張家界前往長沙高鐵班次（票價 ￥166）</div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center font-mono">
+              <div class="p-2 border rounded-lg bg-white"><strong>C7961</strong><br><span class="text-xs text-slate-500">16:08-18:18</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>C7769</strong><br><span class="text-xs text-slate-500">17:00-18:52</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>G3763</strong><br><span class="text-xs text-slate-500">17:45-19:36</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>C7783</strong><br><span class="text-xs text-slate-500">18:00-19:54</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>G2435</strong><br><span class="text-xs text-slate-500">18:05-20:05</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>G5667</strong><br><span class="text-xs text-slate-500">18:40-20:35</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>G2447</strong><br><span class="text-xs text-slate-500">18:53-20:45</span></div>
+              <div class="p-2 border rounded-lg bg-white"><strong>C7943</strong><br><span class="text-xs text-slate-500">19:00-20:55</span></div>
+            </div>
+          </div>
+
+          <div class="border-t pt-4 space-y-3">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-qrcode text-emerald-600"></i> Klook 天門山導覽門票憑證與方案</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              
+              
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/Day5-天門山導覽門票憑證 3.jpg', '天門山憑證3')">
+                  <img src="images/Day5-天門山導覽門票憑證 3.jpg" class="w-full h-full object-contain select-none" alt="憑證3">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-medium text-slate-700">方案包含與不包含說明[cite: 40]</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== DAY 6 ==================== -->
+      <div id="content-day6" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">10/17 (週四)</span>
+              <h2 class="text-lg md:text-xl font-bold text-slate-800 mt-1"><i class="fa-solid fa-plane-departure text-emerald-600 mr-2"></i>Day 6：輕鬆早晨與返家搭機</h2>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs md:text-sm">
+            <div class="relative border-l-2 border-emerald-400 pl-4 space-y-4 ml-2">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border">
+                <div>
+                  <span class="font-bold text-slate-800">09:00 – 10:00</span>
+                  <p class="text-slate-600 mt-0.5">飯店悠閒享用早餐。</p>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border">
+                <div>
+                  <span class="font-bold text-slate-800">10:00 – 11:00</span>
+                  <p class="text-slate-600 mt-0.5">整理行李退房，或於飯店附近周邊散步巡禮。</p>
+                </div>
+              </div>
+
+              <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div class="space-y-1">
+                  <span class="font-bold text-emerald-900 text-sm">11:00 – 12:00 | 地鐵前往長沙黃花機場</span>
+                  <p class="text-emerald-800 text-xs leading-relaxed">
+                    西蘭蒂亞飯店 ➔ 🚶 步行 13 分鐘 ➔ <strong>湘雅醫院站 2 號出口</strong> ➔ 🚇 地鐵 6 號線 (乘車約 45 分鐘) ➔ 抵達<strong>黃花機場 T2 航廈</strong>。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border space-y-2 text-xs md:text-sm">
+            <div class="font-bold text-slate-800">✈️ 回程航班資訊：</div>
+            <div>14:00 - 15:35 | 長沙黃花 T2 ➔ 廈門高崎 T3[cite: 7, 8, 9]</div>
+            <div>17:10 - 18:45 | 廈門高崎 T3 ➔ 台北松山 T1[cite: 7, 8, 9]</div>
+          </div>
+
+          
+
+        </div>
+      </div>
+
+      <!-- ==================== FOOD (4 SECTIONS) ==================== -->
+      <div id="content-food" class="tab-content hidden">
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+          <h2 class="text-lg md:text-xl font-bold text-slate-800"><i class="fa-solid fa-utensils text-amber-500 mr-2"></i>長沙與張家界必吃美食圖鑑</h2>
+
+          <!-- 1. 🌶️ 長沙必吃在地美食與手搖特飲 -->
+          <div class="space-y-4">
+            <h3 class="text-md font-bold text-amber-800 border-b pb-2 flex items-center gap-2">
+              <i class="fa-solid fa-pepper-hot text-amber-600"></i> 🌶️ 長沙必吃在地美食與手搖特飲
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-臭豆腐.jpg', '臭豆腐')">
+                  <img src="images/長沙美食-臭豆腐.jpg" class="w-full h-full object-contain select-none" alt="臭豆腐">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">臭豆腐[cite: 45]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-糖油粑粑 .jpg', '糖油粑粑')">
+                  <img src="images/長沙美食-糖油粑粑 .jpg" class="w-full h-full object-contain select-none" alt="糖油粑粑">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">糖油粑粑[cite: 46]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-茶顏悅色.jpg', '茶顏悅色')">
+                  <img src="images/長沙美食-茶顏悅色.jpg" class="w-full h-full object-contain select-none" alt="茶顏悅色">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">茶顏悅色[cite: 47]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-辣椒炒肉.jpg', '辣椒炒肉')">
+                  <img src="images/長沙美食-辣椒炒肉.jpg" class="w-full h-full object-contain select-none" alt="辣椒炒肉">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">辣椒炒肉[cite: 48]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-小炒黃牛肉.jpg', '小炒黃牛肉')">
+                  <img src="images/長沙美食-小炒黃牛肉.jpg" class="w-full h-full object-contain select-none" alt="小炒黃牛肉">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">小炒黃牛肉[cite: 49]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-剁椒魚頭.jpg', '剁椒魚頭')">
+                  <img src="images/長沙美食-剁椒魚頭.jpg" class="w-full h-full object-contain select-none" alt="剁椒魚頭">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">剁椒魚頭[cite: 50]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-口味蝦 : 麻辣小龍蝦.jpg', '口味蝦')">
+                  <img src="images/長沙美食-口味蝦 : 麻辣小龍蝦.jpg" class="w-full h-full object-contain select-none" alt="口味蝦">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">口味蝦 (麻辣小龍蝦)[cite: 51]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-紫蘇桃子姜.jpg', '紫蘇桃子姜')">
+                  <img src="images/長沙美食-紫蘇桃子姜.jpg" class="w-full h-full object-contain select-none" alt="紫蘇桃子姜">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">紫蘇桃子姜[cite: 52]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-蔥油粉.jpg', '蔥油粉')">
+                  <img src="images/長沙美食-蔥油粉.jpg" class="w-full h-full object-contain select-none" alt="蔥油粉">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">蔥油粉[cite: 53]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-湖南醬板鴨.jpg', '湖南醬板鴨')">
+                  <img src="images/長沙美食-湖南醬板鴨.jpg" class="w-full h-full object-contain select-none" alt="湖南醬板鴨">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">湖南醬板鴨[cite: 54]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-桂花酒釀軟酪.jpg', '桂花酒釀軟酪')">
+                  <img src="images/長沙美食-桂花酒釀軟酪.jpg" class="w-full h-full object-contain select-none" alt="桂花酒釀軟酪">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">桂花酒釀軟酪[cite: 55]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-小龍蝦鍋貼.jpg', '小龍蝦鍋貼')">
+                  <img src="images/長沙美食-小龍蝦鍋貼.jpg" class="w-full h-full object-contain select-none" alt="小龍蝦鍋貼">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">小龍蝦鍋貼[cite: 56]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-蘋果夾酸奶.jpg', '蘋果夾酸奶')">
+                  <img src="images/長沙美食-蘋果夾酸奶.jpg" class="w-full h-full object-contain select-none" alt="蘋果夾酸奶">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">蘋果夾酸奶[cite: 57]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-橙香雞翅.jpg', '橙香雞翅')">
+                  <img src="images/長沙美食-橙香雞翅.jpg" class="w-full h-full object-contain select-none" alt="橙香雞翅">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">橙香雞翅[cite: 58]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/長沙美食-紗布芝士酸奶.jpg', '紗布芝士酸奶')">
+                  <img src="images/長沙美食-紗布芝士酸奶.jpg" class="w-full h-full object-contain select-none" alt="紗布芝士酸奶">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">紗布芝士酸奶[cite: 59]</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. ⛰️ 張家界必吃特色料理小吃 -->
+          <div class="space-y-4 pt-4">
+            <h3 class="text-md font-bold text-emerald-800 border-b pb-2 flex items-center gap-2">
+              <i class="fa-solid fa-mountain text-emerald-600"></i> ⛰️ 張家界必吃特色料理小吃
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-土家三下鍋.jpg', '土家三下鍋')">
+                  <img src="images/張家界美食-土家三下鍋.jpg" class="w-full h-full object-contain select-none" alt="土家三下鍋">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">土家三下鍋[cite: 60]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-岩耳燉土雞.jpg', '岩耳燉土雞')">
+                  <img src="images/張家界美食-岩耳燉土雞.jpg" class="w-full h-full object-contain select-none" alt="岩耳燉土雞">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">岩耳燉土雞[cite: 61]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-土家臘味.jpg', '土家臘味')">
+                  <img src="images/張家界美食-土家臘味.jpg" class="w-full h-full object-contain select-none" alt="土家臘味">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">土家臘味[cite: 62]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-溪口臘牛肉.jpg', '溪口臘牛肉')">
+                  <img src="images/張家界美食-溪口臘牛肉.jpg" class="w-full h-full object-contain select-none" alt="溪口臘牛肉">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">溪口臘牛肉[cite: 63]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-酥皮蕃茄牛腩.jpg', '酥皮蕃茄牛腩')">
+                  <img src="images/張家界美食-酥皮蕃茄牛腩.jpg" class="w-full h-full object-contain select-none" alt="酥皮蕃茄牛腩">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">酥皮蕃茄牛腩[cite: 64]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-高壓鍋口味蟹.jpg', '高壓鍋口味蟹')">
+                  <img src="images/張家界美食-高壓鍋口味蟹.jpg" class="w-full h-full object-contain select-none" alt="高壓鍋口味蟹">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">高壓鍋口味蟹[cite: 65]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-蟹腳麵.jpg', '蟹腳麵')">
+                  <img src="images/張家界美食-蟹腳麵.jpg" class="w-full h-full object-contain select-none" alt="蟹腳麵">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">蟹腳麵[cite: 66]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-蒿子粑粑 .jpg', '蒿子粑粑')">
+                  <img src="images/張家界美食-蒿子粑粑 .jpg" class="w-full h-full object-contain select-none" alt="蒿子粑粑">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">蒿子粑粑[cite: 67]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-油粑粑 .jpg', '油粑粑')">
+                  <img src="images/張家界美食-油粑粑 .jpg" class="w-full h-full object-contain select-none" alt="油粑粑">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">油粑粑[cite: 68]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-米豆腐.jpg', '米豆腐')">
+                  <img src="images/張家界美食-米豆腐.jpg" class="w-full h-full object-contain select-none" alt="米豆腐">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">米豆腐[cite: 69]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-土家十大碗.jpg', '土家十大碗')">
+                  <img src="images/張家界美食-土家十大碗.jpg" class="w-full h-full object-contain select-none" alt="土家十大碗">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">土家十大碗[cite: 70]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-豬腦殼涼麵.jpg', '豬腦殼涼麵')">
+                  <img src="images/張家界美食-豬腦殼涼麵.jpg" class="w-full h-full object-contain select-none" alt="豬腦殼涼麵">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">豬腦殼涼麵[cite: 71]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-酸肉.jpg', '酸肉')">
+                  <img src="images/張家界美食-酸肉.jpg" class="w-full h-full object-contain select-none" alt="酸肉">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">酸肉[cite: 72]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-32 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-酸酢魚 .jpg', '酸酢魚')">
+                  <img src="images/張家界美食-酸酢魚 .jpg" class="w-full h-full object-contain select-none" alt="酸酢魚">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">酸酢魚[cite: 73]</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. 🏪 推薦知名店家 -->
+          <div class="space-y-4 pt-4">
+            <h3 class="text-md font-bold text-cyan-800 border-b pb-2 flex items-center gap-2">
+              <i class="fa-solid fa-store text-cyan-600"></i> 🏪 推薦知名店家
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-36 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-劉聾子粉館.jpg', '劉聾子粉館')">
+                  <img src="images/張家界美食-劉聾子粉館.jpg" class="w-full h-full object-contain select-none" alt="劉聾子粉館">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">劉聾子粉館 (老字號燉粉)[cite: 74]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-36 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-大隊老漁村.jpg', '大隊老漁村')">
+                  <img src="images/張家界美食-大隊老漁村.jpg" class="w-full h-full object-contain select-none" alt="大隊老漁村">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">大隊老漁村 (湘西水產魚饌)[cite: 76]</div>
+              </div>
+              <div class="photo-card bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative h-36 bg-slate-900 flex items-center justify-center cursor-pointer" ondblclick="openImageModal('images/張家界美食-蠔布斯龍蝦港.jpg', '蠔布斯龍蝦港')">
+                  <img src="images/張家界美食-蠔布斯龍蝦港.jpg" class="w-full h-full object-contain select-none" alt="蠔布斯龍蝦港">
+                </div>
+                <div class="p-2.5 bg-white border-t text-xs font-bold text-slate-700 text-center">蠔布斯龍蝦港 (海鮮小龍蝦)[cite: 77]</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm pt-2">
+              <div class="bg-slate-50 p-3 rounded-lg border"><strong>灶灶土鉢菜</strong><p class="text-slate-500 text-xs mt-0.5">傳統道地土鉢菜料理[cite: 75]</p></div>
+              <div class="bg-slate-50 p-3 rounded-lg border"><strong>炊煙小炒黃牛肉 & 費大廚辣椒炒肉</strong><p class="text-slate-500 text-xs mt-0.5">長沙必吃人氣湘菜名店</p></div>
+            </div>
+          </div>
+
+          <!-- 4. 🛒 推薦補給超市 -->
+          <div class="space-y-3 pt-4">
+            <h3 class="text-md font-bold text-indigo-800 border-b pb-2 flex items-center gap-2">
+              <i class="fa-solid fa-cart-shopping text-indigo-600"></i> 🛒 推薦補給超市
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs md:text-sm">
+              <div class="bg-cyan-50 p-3.5 rounded-lg border border-cyan-200">
+                <div class="font-bold text-cyan-900">梅尼超市 (金豐花園店)</div>
+                <p class="text-cyan-700 text-xs mt-1">📍 張家界飯店步行約 6 分鐘，適合補充水壺、零食與乾糧。</p>
+              </div>
+              <div class="bg-cyan-50 p-3.5 rounded-lg border border-cyan-200">
+                <div class="font-bold text-cyan-900">春天超市</div>
+                <p class="text-cyan-700 text-xs mt-1">📍 當地大型連鎖超市，品項齊全。</p>
+              </div>
+              <div class="bg-cyan-50 p-3.5 rounded-lg border border-cyan-200">
+                <div class="font-bold text-cyan-900">步步高超市</div>
+                <p class="text-cyan-700 text-xs mt-1">📍 湖南知名大型零售超市，購物便利。</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function switchTab(dayKey) {
+      document.querySelectorAll('.day-tab').forEach(btn => {
+        btn.classList.remove('bg-emerald-700', 'bg-amber-600', 'text-white', 'shadow');
+        btn.classList.add('bg-white', 'text-slate-600');
+      });
+      const activeBtn = document.getElementById(`tab-${dayKey}`);
+      if (activeBtn) {
+        if(dayKey === 'food') {
+          activeBtn.classList.remove('bg-white', 'text-slate-600');
+          activeBtn.classList.add('bg-amber-600', 'text-white');
+        } else {
+          activeBtn.classList.remove('bg-white', 'text-slate-600');
+          activeBtn.classList.add('bg-emerald-700', 'text-white', 'shadow');
+        }
+      }
+      document.querySelectorAll('.tab-content').forEach(pane => pane.classList.add('hidden'));
+      const activePane = document.getElementById(`content-${dayKey}`);
+      if (activePane) activePane.classList.remove('hidden');
+      localStorage.setItem('active_tab', dayKey);
+    }
+
+    function openImageModal(imgSrc, caption = '') {
+      if(!imgSrc) return;
+      const modal = document.getElementById('image-modal');
+      document.getElementById('modal-img').src = imgSrc;
+      document.getElementById('modal-caption').textContent = caption || '放大檢視';
+      modal.classList.remove('hidden');
+    }
+
+    function closeImageModal() {
+      document.getElementById('image-modal').classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImageModal();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const activeTab = localStorage.getItem('active_tab');
+      if (activeTab) switchTab(activeTab);
+    });
+  </script>
+</body>
+</html>
